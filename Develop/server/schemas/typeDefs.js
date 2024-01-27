@@ -24,7 +24,7 @@ type Auth {
 }
 
 type Query {
-    me(_id: ID!): User
+    me: User
 }
 
 input SaveBookInput {
