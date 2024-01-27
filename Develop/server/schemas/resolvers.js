@@ -11,8 +11,25 @@ module.exports = {
             throw AuthenticationError;
         }
     },
-    
-    Mutation: {
 
-    }
+    Mutation: {
+        // TODO: incorporate auth stuff/token?
+        createUser: async (_, { username, email, password }) => {
+            const newUser = await User.create({ username, email, password });
+            const token = signToken(newUser);
+            return {token, newUser};
+        },
+        //
+        saveBook: async (_, { user, input }) => {
+           return await User.findOneAndUpdate(
+            {_id: user, $addToSet: { savedBooks: input}}
+           )
+        },
+        deleteBook: async (_, { user, bookId }) => {
+            return await User.findOneAndUpdate(
+                {_id: user, $pull: { bookId } }
+            )
+        }
+       
+    } //ends mutation
 }
