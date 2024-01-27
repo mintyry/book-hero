@@ -36,8 +36,9 @@ module.exports = {
         //
         saveBook: async (_, { input }, context) => {
             if (context.user) {
+                // findoneupdate, which one am i looking up, how should i update/whats the action, options
                 return await User.findOneAndUpdate(
-                    { _id: context.user._id, $addToSet: { savedBooks: input } }
+                    { _id: context.user._id}, {$addToSet: { savedBooks: input } }, {new:true, runValidators: true}
                 )
             }
             throw AuthenticationError;
@@ -45,7 +46,7 @@ module.exports = {
         deleteBook: async (_, { bookId }, context) => {
             if (context.user) {
                 return await User.findOneAndUpdate(
-                    { _id: context.user._id, $pull: { bookId } }
+                    { _id: context.user._id}, {$pull: { savedBooks: {bookId} } }, {new:true, runValidators: true}
                 )
             }
             throw AuthenticationError;

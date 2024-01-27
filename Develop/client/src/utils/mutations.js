@@ -1,5 +1,7 @@
 import { gql } from '@apollo/client';
 
+//delete fields that are unused
+
 // mutation for creating a user
 export const CREATE_USER = gql`
 mutation createUser($username: String!, $email: String!, $password: String!) {
@@ -61,6 +63,7 @@ mutation saveBook($input: SaveBookInput!) {
     }
   }
 }`;
+
 
 export const DELETE_BOOK = gql`
 mutation deleteBook($bookId: ID) {
