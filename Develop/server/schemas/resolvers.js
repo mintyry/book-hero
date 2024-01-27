@@ -29,9 +29,9 @@ module.exports = {
             return { token, user }
         },
         createUser: async (_, { username, email, password }) => {
-            const newUser = await User.create({ username, email, password });
-            const token = signToken(newUser);
-            return { token, newUser };
+            const user = await User.create({ username, email, password });
+            const token = signToken(user);
+            return { token, user };
         },
         //
         saveBook: async (_, { input }, context) => {

@@ -2,8 +2,8 @@ const gql = String.raw;
 
 module.exports = gql`
 type User {
-    _id: ID
-    username: String
+    _id: ID!
+    username: String!
     email: String
     bookCount: Int
     savedBooks: [Book]
@@ -38,10 +38,9 @@ input SaveBookInput {
 
 type Mutation {
     login(email: String!, password: String!): Auth
-    # if problematic, make addUser
     createUser(username: String!, email: String!, password: String!): Auth
-    saveBook(user: ID!, input: SaveBookInput!): User
-    deleteBook(user: ID!, bookId: ID): User
+    saveBook(input: SaveBookInput!): User
+    deleteBook(bookId: ID): User
 }
 
 `;
