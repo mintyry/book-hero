@@ -13,23 +13,42 @@ module.exports = {
     },
 
     Mutation: {
-        // TODO: incorporate auth stuff/token?
+        login: async (_, { email, password }) => {
+            const user = await User.findOne({ email });
+            if (!user) {
+                throw AuthenticationError;
+            }
+
+            const correctPw = await user.isCorrectPassword(password);
+            if (!correctPw) {
+                throw AuthenticationError;
+            }
+
+            const token = signToken(user);
+
+            return { token, user }
+        },
         createUser: async (_, { username, email, password }) => {
             const newUser = await User.create({ username, email, password });
             const token = signToken(newUser);
-            return {token, newUser};
+            return { token, newUser };
         },
         //
-        saveBook: async (_, { user, input }) => {
-           return await User.findOneAndUpdate(
-            {_id: user, $addToSet: { savedBooks: input}}
-           )
+        saveBook: async (_, { input }, context) => {
+            if (context.user) {
+                return await User.findOneAndUpdate(
+                    { _id: context.user._id, $addToSet: { savedBooks: input } }
+                )
+            }
+            throw AuthenticationError;
         },
-        deleteBook: async (_, { user, bookId }) => {
-            return await User.findOneAndUpdate(
-                {_id: user, $pull: { bookId } }
-            )
+        deleteBook: async (_, { bookId }, context) => {
+            if (context.user) {
+                return await User.findOneAndUpdate(
+                    { _id: context.user._id, $pull: { bookId } }
+                )
+            }
+            throw AuthenticationError;
         }
-       
     } //ends mutation
-}
+};
