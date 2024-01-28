@@ -31,11 +31,6 @@ const SavedBooks = () => {
   const { loading, data } = useQuery(GET_ME);
   const [deleteBook, { error }] = useMutation(DELETE_BOOK)
 
-  // use this to determine if `useEffect()` hook needs to run again
-  const userDataLength = Object.keys(userData).length;
-  console.log(userData)
-  console.log(userDataLength)
-
   useEffect(() => {
     const getUserData = async () => {
       try {
@@ -53,7 +48,8 @@ const SavedBooks = () => {
     };
 
     getUserData();
-  }, [userDataLength]);
+    // will run again when data changes (data.length would get me stuck on loading page)
+  }, [data]);
 
   // create function that accepts the book's mongo _id value as param and deletes the book from the database
   const handleDeleteBook = async (bookId) => {
