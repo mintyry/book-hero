@@ -8,8 +8,7 @@ import {
 } from 'react-bootstrap';
 
 // so we can use query and mutation
-import { useQuery } from '@apollo/client';
-import { useMutation } from '@apollo/client';
+import { useQuery, useMutation } from '@apollo/client';
 
 // actual query and mutation
 import { GET_ME } from '../utils/queries';
@@ -22,6 +21,8 @@ import { removeBookId } from '../utils/localStorage';
 
 const SavedBooks = () => {
   const [userData, setUserData] = useState({});
+  const { loading, data } = useQuery(GET_ME);
+  const [deleteBook, { error }] = useMutation(DELETE_BOOK)
 
   // use this to determine if `useEffect()` hook needs to run again
   const userDataLength = Object.keys(userData).length;
@@ -42,6 +43,8 @@ const SavedBooks = () => {
         // }
 
         // const user = await response.json();
+        // user variable equals the me data or an empty obj
+        const user = data?.me || {};
         setUserData(user);
       } catch (err) {
         console.error(err);
