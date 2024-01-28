@@ -29,28 +29,27 @@ import { removeBookId } from '../utils/localStorage';
 const SavedBooks = () => {
   const [userData, setUserData] = useState({});
   const { loading, data } = useQuery(GET_ME);
-  const [deleteBook, { error }] = useMutation(DELETE_BOOK)
+  const [deleteBook, { error }] = useMutation(DELETE_BOOK);
 
-  // use this to determine if `useEffect()` hook needs to run again
+  const getUserData = async () => {
+    try {
+      // checking if user is logged in, if so we get tokenId from local storage
+      const token = Auth.loggedIn() ? Auth.getToken() : null;
+
+      if (!token) {
+        return false;
+      }
+
+      if (!loading) {
+        const user = data?.me || {};
+        setUserData(user);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   useEffect(() => {
-    const getUserData = async () => {
-      try {
-        const token = Auth.loggedIn() ? Auth.getToken() : null;
-
-        if (!token) {
-          return false;
-        }
-
-        if (!loading) {
-          const user = data?.me || {};
-          setUserData(user);
-        }
-      } catch (err) {
-        console.error(err);
-      }
-    };
-
     getUserData();
   }, [data]);
 
@@ -83,6 +82,7 @@ const SavedBooks = () => {
     return <h2>LOADING...</h2>;
   }
 
+  // used optional chaining bc savedBooks is coming back as undefined; opt chaining allows us to move forward while that data is still being fetched
   return (
     <>
       <div fluid className="text-light bg-dark p-5">
