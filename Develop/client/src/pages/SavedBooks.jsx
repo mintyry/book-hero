@@ -7,6 +7,15 @@ import {
   Col
 } from 'react-bootstrap';
 
+// so we can use query and mutation
+import { useQuery } from '@apollo/client';
+import { useMutation } from '@apollo/client';
+
+// actual query and mutation
+import { GET_ME } from '../utils/queries';
+import { DELETE_BOOK } from '../utils/mutations';
+
+
 import { getMe, deleteBook } from '../utils/API';
 import Auth from '../utils/auth';
 import { removeBookId } from '../utils/localStorage';
@@ -25,14 +34,14 @@ const SavedBooks = () => {
         if (!token) {
           return false;
         }
+// CHANGE THESE THREE
+        // const response = await getMe(token);
 
-        const response = await getMe(token);
+        // if (!response.ok) {
+        //   throw new Error('something went wrong!');
+        // }
 
-        if (!response.ok) {
-          throw new Error('something went wrong!');
-        }
-
-        const user = await response.json();
+        // const user = await response.json();
         setUserData(user);
       } catch (err) {
         console.error(err);
