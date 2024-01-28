@@ -33,6 +33,8 @@ const SavedBooks = () => {
 
   // use this to determine if `useEffect()` hook needs to run again
   const userDataLength = Object.keys(userData).length;
+  console.log(userData)
+  console.log(userDataLength)
 
   useEffect(() => {
     const getUserData = async () => {
