@@ -1,5 +1,5 @@
 // see SignupForm.js for comments
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
 // import useMutation hook so we can literally use the mutation we wrote later
 import { useMutation } from '@apollo/client';
