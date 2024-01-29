@@ -10,6 +10,8 @@ The motivation behind this app was to streamline a way for anyone to keep tabs o
 
 In making this app, I became more familiar with how to use GraphQL to replace RESTful API, and I also learned how to integrate it within the React framework. On a more granular level, I also learned that although you may be making variables, sometimes it will matter what you name a variable, especially if you are going to pass it to the blueprint of functionality, in this case, typeDefs.
 
+Please enjoy [Book Hero](https://book-hero-946cc6770603.herokuapp.com)!
+
 
 ## Table of Contents
 
