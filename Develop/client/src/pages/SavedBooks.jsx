@@ -81,11 +81,11 @@ const SavedBooks = () => {
   // used optional chaining bc savedBooks is coming back as undefined; opt chaining allows us to move forward while that data is still being fetched
   return (
     <>
-      <div fluid className="text-light bg-dark p-5">
+      <Container fluid className="text-light bg-dark p-5">
         <Container>
           <h1>Viewing saved books!</h1>
         </Container>
-      </div>
+      </Container>
       <Container>
         <h2 className='pt-5'>
           {userData?.savedBooks?.length
