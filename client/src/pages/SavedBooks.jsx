@@ -14,9 +14,7 @@ import { useQuery, useMutation } from '@apollo/client';
 import { GET_ME } from '../utils/queries';
 import { DELETE_BOOK } from '../utils/mutations';
 
-// fetch requests; they pass token when they need to to get info from the users/me db
-// delete book via bookId (in params), but i dont think we need params, because our api endpoint is just one: graphql
-import { getMe, deleteBook } from '../utils/API';
+
 // auth is a class with methods in it:
 // getProfile decodes a token within the class of AuthService
 // loggedIn checks if token is still in expiration range; if not expired yet, then return the token

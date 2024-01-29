@@ -38,7 +38,7 @@ const client = new ApolloClient({
         fields: {
           savedBooks: {
             merge(existing, incoming) {
-              // custom merge logic
+              // custom merge logic to remove warning message from Apollo
               return [...incoming];
             },
           },
@@ -48,6 +48,7 @@ const client = new ApolloClient({
   }),
 });
 
+// Wrap in ApolloProvider to use Apollo/client capabilities
 function App() {
   return (
     <ApolloProvider client={client}>

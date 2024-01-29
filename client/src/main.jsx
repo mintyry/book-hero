@@ -6,6 +6,7 @@ import App from './App.jsx'
 import SearchBooks from './pages/SearchBooks'
 import SavedBooks from './pages/SavedBooks'
 
+// sets up routes/paths
 const router = createBrowserRouter([
   {
     path: '/',

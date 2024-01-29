@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client';
 
-//delete fields that are unused
+// queries for all the data we need
 
 // mutation for creating a user
 export const CREATE_USER = gql`
@@ -11,19 +11,9 @@ mutation createUser($username: String!, $email: String!, $password: String!) {
       _id
       username
       email
-      bookCount
-      savedBooks {
-        bookId
-        authors
-        description
-        title
-        image
-        link
-      }
     }
   }
-}
-`;
+}`;
 
 export const LOGIN = gql`
 mutation login($email: String!, $password: String!) {
@@ -33,15 +23,6 @@ mutation login($email: String!, $password: String!) {
       _id
       username
       email
-      bookCount
-      savedBooks {
-        bookId
-        authors
-        description
-        title
-        image
-        link
-      }
     }
   }
 }`;

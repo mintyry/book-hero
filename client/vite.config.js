@@ -7,6 +7,7 @@ export default defineConfig({
   server: {
     port: 3000,
     open: true,
+    // set the path to graphql; since front and back end runs on diff ports, we proxy the backend port to front
     proxy: {
       '/graphql': {
         target: 'http://localhost:3001',

@@ -2,9 +2,9 @@ import { useState, useEffect } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
 import { useMutation } from '@apollo/client';
 
+// added mutation instead of API route
 import { CREATE_USER } from '../utils/mutations';
 
-import { createUser } from '../utils/API';
 import Auth from '../utils/auth';
 
 const SignupForm = () => {

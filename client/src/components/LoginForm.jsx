@@ -6,8 +6,6 @@ import { useMutation } from '@apollo/client';
 // import LOGIN mutation
 import { LOGIN } from '../utils/mutations';
 
-
-import { loginUser } from '../utils/API';
 // import the AuthService function
 import Auth from '../utils/auth';
 

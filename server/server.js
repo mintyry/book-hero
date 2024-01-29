@@ -1,12 +1,15 @@
+// import necessary midware and components and modules
 const express = require('express');
 const { ApolloServer } = require('@apollo/server');
 const { expressMiddleware } = require('@apollo/server/express4');
 const path = require('path');
 const { authMiddleware } = require('./utils/auth');
 
+// bringing in typeDefs and resolvers
 const { typeDefs, resolvers } = require('./schemas');
 const db = require('./config/connection');
 
+// back end runs on 3001
 const PORT = process.env.PORT || 3001;
 const app = express();
 const server = new ApolloServer({
@@ -14,6 +17,7 @@ const server = new ApolloServer({
   resolvers,
 });
 
+// function that starts the apollo server, uses graphql route instead of individual routes for every piece of data and CRUD method.
 const startApolloServer = async () => {
   await server.start();
   
